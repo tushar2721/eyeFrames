@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Talisco.com</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+     <style>
+  .modal-header, h4, .close {
+      background-color: #12a9ba;
+      color:white !important;
+      text-align: center;
+      font-size: 30px;
+  }
+  .modal-footer {
+      background-color: #f9f9f9;
+  }
+  </style>
+</head>
+<body>
+<form>
+<div class="container">
+<h4 align="center"><i>User Registration</i></h4><br>
+            <div class="form-group">
+              <label for="name"><span class="glyphicon glyphicon-user"></span> Name</label>
+              <input type="text" class="form-control" placeholder="Enter Name" ng-model="name.value" ng-change="name.validate()">
+                <div ng-if="name.touched && name.error">
+                	Name should be in between 2-10 character  
+                </div>                           
+            </div>
+            <div class="form-group">
+              <label for="password"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+              <input type="password" class="form-control" placeholder="Enter Password" ng-model="password.value" ng-change="password.validate()">
+            <div ng-if="password.touched && password.error">
+                	Password should be in between 2-10 character  
+                </div>
+            </div>
+            <div class="form-group">
+              <label for="email"><span class="glyphicon glyphicon-send"></span> Email</label>
+              <input type="text" class="form-control" placeholder="Enter Email" ng-model="email.value" ng-change="email.validate()">
+            <div ng-if="email.touched && email.error">
+                	Invalid Email  
+                </div>
+            </div>
+            <div class="form-group">
+              <label for="Mobile"><span class="glyphicon glyphicon-phone"></span> Mobile</label>
+              <input type="text" class="form-control" placeholder="Enter Mobile" ng-model="mobile.value" ng-change="mobile.validate()">
+            <div ng-if="mobile.touched && mobile.error">
+                	Invalid Mobile Number  
+                </div>
+            </div>
+            <div class="form-group">
+              <label for="address"><span class="glyphicon glyphicon-globe"></span> Address</label>
+              <input type="text" class="form-control" placeholder="Enter Address" ng-model="address.value" ng-change="address.validate()">
+            <div ng-if="address.touched && address.error">
+                	Invalid Address  
+                </div>
+            </div>
+            <div class="form-group">
+              <label for="pincode"><span class="glyphicon glyphicon-inbox"></span> Pincode</label>
+              <input type="text" class="form-control" placeholder="Enter Pincode" ng-model="pincode.value" ng-change="pincode.validate()">
+            <div ng-if="pincode.touched && pincode.error">
+                	Invalid Pincode  
+                </div>
+            </div>
+            <div class="form-group">
+              <label for="gender"><span class="glyphicon glyphicon-inbox"></span> Gender</label>
+              <select ng-model="gender" ng-options="gen for gen in ['Male','Female']"></select>
+            </div>
+            <div>
+              <button type="submit" class="btn btn-primary btn-block" ng-click="SaveUser()"><span class="glyphicon glyphicon-user"></span>Signup</button>
+              <button type="cancel" class="btn btn-danger btn-block"><span class="glyphicon glyphicon-user"></span> Cancel</button>
+          </div>
+          </div>
+</form>
+</body>
+</html>

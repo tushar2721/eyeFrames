@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+.bgfixed{
+background-color: #bbe8a4;
+color: black;
+padding: 0px 10px 10px 30px;
+}
+</style>
+  <title>Forum</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<h4>Forum</h4>
+<div ng-repeat="x in AllForums" class="container bgfixed" >
+       <i><h5>{{x.ftittle}}</h5>
+       <h5>{{x.fdesc}}</h5></i>
+       <button type="button" class="btn btn-danger" data-toggle="modal" ng-click="EditForum(x.id)" data-target="#myModal1">Edit</button>
+       <button type="button" class="btn btn-danger" ng-click="DeleteForum(x.id)">Delete</button>
+       <button type="button" class="btn btn-primary" ng-click="#">Like</button>
+       <!-- <textarea class="form-control" rows="4">Comment</textarea>
+       <button type="button" class="btn btn-danger" ng-click="#">Submit</button> -->
+</div>
+<br><br>
+<div class="container">
+  <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Forum</button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add Forum</h4>
+        </div>
+        <div class="modal-body">
+         <div class="form-group">
+              <label for="tittle">Tittle</label>
+              <input type="text" class="form-control" placeholder="Enter Tittle" ng-model="ftittle.value" ng-change="ftittle.validate()">
+                <div ng-if="ftittle.touched && ftittle.error">
+                	Title should be in between 5-30 character 
+                </div>                           
+            </div>
+          <div class="form-group">
+              <label for="desc">Description</label>
+              <input type="text" class="form-control" placeholder="Enter Description" ng-model="fdesc.value" ng-change="fdesc.validate()">
+                <div ng-if="fdesc.touched && fdesc.error">
+                	Description should be more than 20 character 
+                </div>                           
+            </div>
+          <button type="submit" class="btn btn-danger" ng-click="SaveForum()">Add</button> 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<!-- Edit Modal -->
+   <div class="container">
+  <!-- Trigger the modal with a button -->
+  <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal1">Edit Blog</button> -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal1" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Edit Forum</h4>
+        </div>
+        <div class="modal-body">
+         <div class="form-group">
+              <label for="tittle">Tittle</label>
+              <input type="text" class="form-control" placeholder="Enter Tittle" ng-model="eftittle.value" ng-change="eftittle.validate()">
+                <div ng-if="eftittle.touched && eftittle.error">
+                	Title should be in between 5-30 character
+                </div>                           
+            </div>
+          <div class="form-group">
+              <label for="desc">Description</label>
+              <input type="text" class="form-control" placeholder="Enter Description" ng-model="efdesc.value" ng-change="efdesc.validate()">
+                <div ng-if="efdesc.touched && efdesc.error">
+                	Description should be more than 20 character  
+                </div>                           
+            </div>
+          <button type="submit" class="btn btn-danger" ng-click="SaveForumeToDB()">Save</button> 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+</body>
+</html>

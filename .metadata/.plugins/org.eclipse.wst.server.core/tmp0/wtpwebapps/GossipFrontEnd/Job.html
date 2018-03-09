@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.bgfixed{
+background-color: #bbe8a4;
+color: black;
+padding: 0px 10px 10px 30px;
+}
+</style>
+  <title>Blog</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<script>
+$(function () {
+    $("#chkComment").click(function () {
+        if ($(this).is(":checked")) {
+            $("#dvComment").show();
+        } else {
+            $("#dvComment").hide();
+        }
+    });
+});
+</script>
+<h4>Jobs</h4>
+<div ng-repeat="x in AllJobs" class="container bgfixed" >
+       <i><h5>{{x.jtittle}}</h5>
+       <h5>{{x.jdesc}}</h5>
+       <h5>{{x.salary}}</h5>
+       <h5>{{x.comment}}</h5></i>
+       <button type="button" class="btn btn-danger" data-toggle="modal" ng-click="EditJob(x.id)" data-target="#myModal1">Edit</button>
+       <button type="button" class="btn btn-danger" ng-click="DeleteJob(x.id)">Delete</button>
+       <button type="button" class="btn btn-primary" ng-click="#">Apply For This Job</button>
+       </div>	<br><br>
+       <label for="chkComment"><input type="checkbox" id="chkComment" />Do you want to comment</label><hr />
+       <div id="dvComment" style="display: none"><h3><i>Comment Here</i></h3><input type="text" id="Comment" ng-model="comment.value" ng-change="comment.validate()" />
+       <button type="button" class="btn btn-primary" ng-click="SaveJobeToDB(EditJob(x.id))">Submit</button>
+       </div>
+       <div ng-if="comment.touched && comment.error">
+                	Comments should be in between 10-200 character  
+       		</div>
+       	 
+  <div class="container">
+  <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Job</button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add Jobs</h4>
+        </div>
+        <div class="modal-body">
+         <div class="form-group">
+              <label for="jtittle">Tittle</label>
+              <input type="text" class="form-control" placeholder="Enter Tittle" ng-model="jtittle.value" ng-change="jtittle.validate()">
+                <div ng-if="jtittle.touched && jtittle.error">
+                	Title should be in between 5-30 character  
+                </div>                           
+            </div>
+          <div class="form-group">
+              <label for="jdesc">Description</label>
+              <input type="text" class="form-control" placeholder="Enter Description" ng-model="jdesc.value" ng-change="jdesc.validate()">
+                <div ng-if="jdesc.touched && jdesc.error">
+                	Description should be more than 20 character  
+                </div>                           
+            </div>
+            <div class="form-group">
+              <label for="salary">Salary</label>
+              <input type="text" class="form-control" placeholder="Enter Salary" ng-model="salary.value" ng-change="salary.validate()">
+                <div ng-if="salary.touched && salary.error">
+                	Salary should be in number  
+                </div>                           
+            </div>
+          <button type="submit" class="btn btn-danger" ng-click="SaveJob()">Add</button> 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<!-- Edit Modal -->
+   <div class="container">
+  <!-- Trigger the modal with a button -->
+  <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal1">Edit Blog</button> -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal1" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Edit Jobs</h4>
+        </div>
+        <div class="modal-body">
+         <div class="form-group">
+              <label for="ejtittle">Tittle</label>
+              <input type="text" class="form-control" placeholder="Enter Tittle" ng-model="ejtittle.value" ng-change="ejtittle.validate()">
+                <div ng-if="ejtittle.touched && ejtittle.error">
+                	Title should be in between 5-30 character  
+                </div>                           
+            </div>
+          <div class="form-group">
+              <label for="ejdesc">Description</label>
+              <input type="text" class="form-control" placeholder="Enter Description" ng-model="ejdesc.value" ng-change="ejdesc.validate()">
+                <div ng-if="ejdesc.touched && ejdesc.error">
+                	Description should be more than 20 character 
+                </div>                           
+            </div>
+            <div class="form-group">
+              <label for="esalary">Salary</label>
+              <input type="text" class="form-control" placeholder="Enter Salary" ng-model="esalary.value" ng-change="esalary.validate()">
+                <div ng-if="esalary.touched && esalary.error">
+                	Salary should be in number  
+                </div>                           
+            </div>
+          <button type="submit" class="btn btn-danger" ng-click="SaveJobeToDB()">Save</button> 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+</body>
+</html>

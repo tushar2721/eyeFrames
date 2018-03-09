@@ -1,0 +1,15 @@
+127.0.0.1 - - [25/Jan/2018:14:35:07 +0530] "GET / HTTP/1.1" 404 994
+0:0:0:0:0:0:0:1 - - [25/Jan/2018:14:36:38 +0530] "GET /GossipBackEnd/ HTTP/1.1" 200 57
+0:0:0:0:0:0:0:1 - - [25/Jan/2018:14:38:00 +0530] "GET /favicon.ico HTTP/1.1" 404 1016
+127.0.0.1 - - [25/Jan/2018:14:40:08 +0530] "GET / HTTP/1.1" 404 994
+0:0:0:0:0:0:0:1 - - [25/Jan/2018:14:40:10 +0530] "GET /GossipBackEnd/ HTTP/1.1" 200 57
+0:0:0:0:0:0:0:1 - - [25/Jan/2018:14:40:33 +0530] "GET /GossipFrontEnd/ HTTP/1.1" 200 3237
+0:0:0:0:0:0:0:1 - - [25/Jan/2018:14:40:34 +0530] "GET /GossipFrontEnd/links.html HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [25/Jan/2018:14:40:34 +0530] "GET /GossipFrontEnd/BlogController.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [25/Jan/2018:14:40:34 +0530] "GET /GossipFrontEnd/RegisterController.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [25/Jan/2018:14:40:34 +0530] "GET /GossipFrontEnd/ProfileController.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [25/Jan/2018:14:40:34 +0530] "GET /GossipFrontEnd/App.js HTTP/1.1" 200 402
+0:0:0:0:0:0:0:1 - - [25/Jan/2018:14:40:41 +0530] "GET /GossipFrontEnd/Profile.html HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [25/Jan/2018:14:40:46 +0530] "POST /GossipBackEnd/showProfileData HTTP/1.1" 200 296
+0:0:0:0:0:0:0:1 - - [25/Jan/2018:14:42:09 +0530] "POST /GossipBackEnd/updateProfilePicture HTTP/1.1" 200 117
+0:0:0:0:0:0:0:1 - - [25/Jan/2018:14:43:07 +0530] "POST /GossipBackEnd/showProfileData HTTP/1.1" 200 296

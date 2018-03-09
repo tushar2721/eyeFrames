@@ -1,0 +1,293 @@
+<!doctype html>
+<html>
+    <head>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgt4UODyJJkWhyR0sjgD9uec-bUWEKH2k" type="text/javascript"></script>
+       
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
+        <script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        <title>Chat Box</title>
+        <style>
+        .bgfixed{
+background-color: #323532;
+color: silver;
+padding: 0px 0px 0px 80px;
+}
+.container-flu {
+background-color: ;
+color: silver;
+padding: 0px 0px 0px 80px;
+height: 50px;
+width: 40%;      
+  }
+            @media only screen and (max-width : 540px) 
+            {
+                .chat-sidebar
+                {
+                    display: none !important;
+                }
+                
+                .chat-popup
+                {
+                    display: none !important;
+                }
+            }
+            
+            body
+            {
+                background-color: white;
+            }
+            
+            .chat-sidebar
+            {
+                width: 220px;
+                position: fixed;
+                height: 100%;
+                right: 0px;
+                top: 70px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                border: 1px solid rgba(29, 49, 91, .3);
+                color:#082c66;
+             
+            }
+            
+            .sidebar-name 
+            {
+            
+                padding-left: 10px;
+                padding-right: 10px;
+                margin-bottom: 4px;
+                font-size: 12px;
+            }
+            
+            .sidebar-name span
+            {
+                padding-left: 5px;
+            }
+            
+            .sidebar-name a
+            {
+                display: block;
+                height: 100%;
+                text-decoration: none;
+                color: inherit;
+            }
+            
+            .sidebar-name:hover
+            {
+                background-color:white;
+            }
+            
+            .sidebar-name img
+            {
+                width: 32px;
+                height: 32px;
+                vertical-align:middle;
+            }
+            
+            .popup-box
+            {
+                display: none;
+                position: fixed;
+                bottom: 0px;
+                right: 220px;
+                height: 285px;
+                background-color: white;
+                width: 300px;
+                border: 1px solid rgba(29, 49, 91, .3);
+            }
+            
+            .popup-box .popup-head
+            {
+                background-color: #323532;
+                padding: 8px;
+                color: #efe8d5;
+                font-weight: italic;
+                font-size: 14px;
+                clear: both;
+            }
+            
+            .popup-box .popup-head .popup-head-left
+            {
+                float: left;
+            }
+            
+            .popup-box .popup-head .popup-head-right
+            {
+                float: right;
+                opacity: 0.5;
+            }
+            
+            .popup-box .popup-head .popup-head-right a
+            {
+                text-decoration: none;
+                color: inherit;
+            }
+            
+            .popup-box .popup-messages
+            {
+                height: 100%;
+                overflow-y: scroll;
+            }
+            
+
+
+        </style>
+        
+<!--          <script>
+            //this function can remove a array element.
+            Array.remove = function(array, from, to) {
+                var rest = array.slice((to || from) + 1 || array.length);
+                array.length = from < 0 ? array.length + from : from;
+                return array.push.apply(array, rest);
+            };
+        
+            //this variable represents the total number of popups can be displayed according to the viewport width
+            var total_popups = 0;
+            
+            //arrays of popups ids
+            var popups = [];
+        
+            //this is used to close a popup
+            function close_popup(id)
+            {
+                for(var iii = 0; iii < popups.length; iii++)
+                {
+                    if(id == popups[iii])
+                    {
+                        Array.remove(popups, iii);
+                        
+                        document.getElementById(id).style.display = "none";
+                        
+                        calculate_popups();
+                        
+                        return;
+                    }
+                }   
+            }
+        
+            //displays the popups. Displays based on the maximum number of popups that can be displayed on the current viewport width
+            function display_popups()
+            {
+                var right = 220;
+                
+                var iii = 0;
+                for(iii; iii < total_popups; iii++)
+                {
+                    if(popups[iii] != undefined)
+                    {
+                        var element = document.getElementById(popups[iii]);
+                        element.style.right = right + "px";
+                        right = right + 320;
+                        element.style.display = "block";
+                    }
+                }
+                
+                for(var jjj = iii; jjj < popups.length; jjj++)
+                {
+                    var element = document.getElementById(popups[jjj]);
+                    element.style.display = "none";
+                }
+            }
+            
+            //creates markup for a new popup. Adds the id to popups array.
+            function register_popup(object)
+            {
+            	object = object.split(';;');
+            	
+            	console.log(object[0])
+            	console.log(object[1])
+            	
+            	id = (object[1])
+            	name = (object[0])
+                
+                for(var iii = 0; iii < popups.length; iii++)
+                {   
+                    //already registered. Bring it to front.
+                    if(id == popups[iii])
+                    {
+                        Array.remove(popups, iii);
+                    
+                        popups.unshift(id);
+                        
+                        calculate_popups();
+                        
+                        
+                        return;
+                    }
+                }               
+                
+                var element = '<div class="popup-box chat-popup" id="'+ id +'">';
+                element = element + '<div class="popup-head">';
+                element = element + '<div class="popup-head-left">'+ name +'</div>';
+                element = element + '<div class="popup-head-right"><a href="javascript:close_popup(\''+ id +'\');">&#10005;</a></div>';
+                element = element + '<div style="clear: both"></div></div><div class="popup-messages"><br><br><br><br><br><br><br><br><br><textarea class="form-control" style="width:300px; height: 30px;"></textarea><button type="button" class="btn btn-danger">Send</button></div></div>';
+                
+                document.getElementsByTagName("body")[0].innerHTML = document.getElementsByTagName("body")[0].innerHTML + element;  
+        
+                popups.unshift(id);
+                        
+                calculate_popups();
+                
+            }
+            
+            //calculate the total number of popups suitable and then populate the toatal_popups variable.
+            function calculate_popups()
+            {
+                var width = window.innerWidth;
+                if(width < 540)
+                {
+                    total_popups = 0;
+                }
+                else
+                {
+                    width = width - 200;
+                    //320 is width of a single popup box
+                    total_popups = parseInt(width/320);
+                }
+                
+                display_popups();
+                
+            }
+            
+            //recalculate when window is loaded and also when window is resized.
+            window.addEventListener("resize", calculate_popups);
+            window.addEventListener("load", calculate_popups);
+            
+        </script> --> 
+    </head>
+    <body>
+    <input id="from" ng-model="from.value">
+    To:&nbsp;&nbsp;&nbsp;<input id="to" ng-model="to.value"><br><br>
+    Text:<input id="text" ng-model="text.value"><br><br>
+    <input type="hidden" id="date">
+<button class="btn btn-primary" ng-click="connect()">Connect</button>
+<button class="btn btn-info" ng-click="send()">Send</button>
+<button class="btn btn-danger" ng-click="disconnect()">Disconnect</button>
+<br><br>
+<table>
+<tr>
+<div ng-repeat="x in AllMessages" class="container-flu" >
+       <i><p>{{x.from}}</p></i>
+       <i><p>{{x.to}}</p></i>
+       <i><p>{{x.text}}</p></i>
+       <i><p>{{x.date}}</p></i>             
+</div></tr></table>    
+        <div class="chat-sidebar">
+        <div class="container bgfixed">
+        <i><h2>Friends</h2></i>
+        </div>
+            <div class="sidebar-name">
+            <div ng-repeat="x in AllFriends">
+                <!-- Pass username and display name to register popup -->
+                <br><span id="{{x.name +';;'+ x.id}}" ng-click="register_popup(object)" >
+                    <img width="30" height="30" src="{{x.profilePicUrl}}" />
+                    <span><i>{{x.name}}</i></span>
+                </span>
+           </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Profile</title>
+</head>
+<body>
+<!-- Modal for password change-->
+  <div class="modal fade" id="updatePasswordModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Sign In</h4>
+        </div>
+        <div class="modal-body">
+          
+           <label><i>Current Password</i></label>
+          <input class="form-control" type="password" ng-model="password.value" ng-change="password.validate()" />
+          <div ng-if="password.touched && password.error">Password not matching</div>
+           <label><i>New Password</i></label>
+          <input class="form-control" type="password" ng-model="Npassword.value" ng-change="Npassword.validate()"/>
+          <div ng-if="Npassword.touched && Npassword.error">Min 8 letter password with 1 digit,Lowercase, Uppercase & Special character</div>
+          
+          <label><i>Confirm New Password</i></label>
+          <input class="form-control" type="password" ng-model="Cpassword.value" ng-change="Cpassword.validate()" />
+          <div ng-if="Cpassword.touched && Cpassword.error">Password not matching</div>
+           <button class="btn btn-success"  ng-disabled='!( !password.error && password.touched && !Cpassword.error && Cpassword.touched && !Npassword.error && Npassword.touched )'  ng-click="UpdatePassword()">update</button>
+          
+        </div>
+        <div class="modal-footer">
+       
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+           
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+
+ <!-- Modal for editing user profile -->
+  <div class="modal fade" id="updateModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Update Profile</h4>
+        </div>
+        <div class="modal-body">
+      
+          <table align="center" >
+		<tr>
+				<td><label><i>User Name</i></label></td>
+				<td><input   placeholder="enter your name" class="form-control" ng-model="Ename.value" ng-change="Ename.validate()"/><br/>
+				<div ng-if="Ename.touched && Ename.error">Enter valid name</div></td>		
+		</tr>
+		
+		<tr>
+				<td><label><i>Address</i></label></td>
+				<td><textarea style="resize:none"   class="form-control"  placeholder="enter your address" ng-model="Eaddress.value" ng-change="Eaddress.validate()"></textarea><br/>
+	            <div ng-if="Eaddress.touched && Eaddress.error">Enter valid address</div></td>	
+		</tr>
+		<tr>
+				<td><label><i>Mobile</i></label></td>
+				<td><input  class="form-control" placeholder="enter your mobile number" ng-model="Emobile.value" ng-change="Emobile.validate()" /><br/>
+				<div ng-if="Emobile.touched && Emobile.error">Enter valid contact number starting with 9,8,7</div></td>
+		</tr>	
+		<tr>
+				<td><label><i>Pin Code</i></label></td>
+				<td><input  class="form-control" placeholder="enter your pincode" ng-model="Epincode.value" ng-change="Epincode.validate()" /><br/>
+				<div ng-if="Epincode.touched && Epincode.error">Enter a valid 6 digit pincode</div></td>
+	    </tr>
+	    <tr>
+				<td><label >Gender</label></td>
+				<td><select ng-model="Egender" ng-options="gen for gen in  ['Male', 'Female']">
+   		        </select></td><br/>
+		</tr>
+		<tr>
+				<td><br/></td>
+		</tr>
+	    <tr>
+	       		 <td> </td>
+	       		<td><button class="btn btn-success"  ng-click="UpdateUser()">Update</button></td>
+	       			
+		</tr>
+</table>
+
+         
+          
+        </div>
+        <div class="modal-footer">
+        
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+           
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+<h4 align="center"><i>My Profile</i></h4>
+<table align="center">
+<tr>
+ <div class="form-group" > 	
+ 	   <div class="container" style="padding-top: -10px;" ng-if="!$routeParams.param">
+  <div class="row">
+    <!-- left column -->
+    <div class="col-md-4 col-sm-6 col-xs-12">
+      <div class="text-center">
+        <td><img src="{{ProfileData.profilePicUrl}}" class="avatar img-square img-thumbnail" style= "height: 500px; width: 400px; padding: 20px; border: 10px solid white; box-shadow: 0px 0px 1px #CCCCCC;" ></td>      
+      </div>
+    </div>
+    </div>
+    </div>
+    <td>
+				<i><h3><label>Name: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+				{{ProfileData.name}}	
+				<br>
+				<label>Mobile: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+				{{ProfileData.mobile}}	
+				<br>
+				<label >Email: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+				{{ProfileData.email}}	
+				<br>
+				<label>Gender: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+				{{ProfileData.gender}}	
+				<br>
+				<label>Address: &nbsp;&nbsp;&nbsp;&nbsp;</label>
+				{{ProfileData.address}}	
+				<br>
+				<label>Pincode: &nbsp;&nbsp;&nbsp;&nbsp;</label>
+				{{ProfileData.pincode}}</h3></i>
+				<br>
+				<button  data-toggle="modal" class="btn btn-warning" data-target="#updateModal" ng-click="showEditData()"> Edit Profile</button>
+				<button  data-toggle="modal" class="btn btn-warning" data-target="#updatePasswordModal" > Password Change</button>
+				<br><br><br><br><br><br><br>
+				<input type="file" class="text-center center-block well well-sm" accept="image/*" file-model="$parent.myFile" />
+				<button class="btn btn-danger" ng-click="checkFileChange()">Submit</button>	
+
+</td>		
+</div>
+</tr>
+</table>
+</body>
+</html>
